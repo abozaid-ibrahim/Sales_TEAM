@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lena AI — عرض الشراكة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #030250;
+    --navy-mid: #06047a;
+    --navy-light: #0d0bb5;
+    --gold: #C9A84C;
+    --gold2: #E8C97A;
+    --white: #ffffff;
+    --offwhite: #F7F7FC;
+    --rule: rgba(3,2,80,0.1);
+    --muted: rgba(3,2,80,0.4);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  @media print {
+    body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { box-shadow: none !important; }
+    .print-btn { display: none !important; }
+  }
+
+  body {
+    background: #e8e8f0;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 110px;
+    min-height: 100vh;
+  }
+
+  .page {
+    width: 794px;
+    background: var(--white);
+    box-shadow: 0 8px 60px rgba(3,2,80,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* faint dot grid */
+  .page::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(3,2,80,0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .z1 { position: relative; z-index: 1; }
+
+  /* ── TOP BAR ── */
+  .top-bar {
+    background: var(--navy);
+    padding: 18px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .top-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold2), var(--gold), var(--navy));
+  }
+
+  .brand-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .brand-word span { color: var(--gold); }
+
+  .top-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 52px 44px 44px;
+    text-align: right;
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* large faint number behind hero */
+  .hero-ghost {
+    position: absolute;
+    top: -10px; left: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 220px;
+    font-weight: 900;
+    color: rgba(3,2,80,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .hero-kicker::after {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-h1 {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .hero-h1 .accent { color: var(--gold); }
+
+  .hero-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    direction: ltr;
+    text-align: left;
+    margin-top: 6px;
+  }
+
+  /* ── TWO COLUMNS ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    z-index: 1;
+  }
+
+  .two-col::before {
+    content: '';
+    position: absolute;
+    top: 40px; bottom: 40px;
+    left: 50%;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  /* ── CARD ── */
+  .card {
+    padding: 40px 40px 36px;
+    position: relative;
+  }
+
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 22px;
+  }
+
+  .tag-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 0;
+  }
+
+  .tag-pill.pain {
+    background: rgba(220,50,50,0.08);
+    color: #c0392b;
+    border: 1px solid rgba(220,50,50,0.2);
+  }
+
+  .tag-pill.opp {
+    background: rgba(3,2,80,0.07);
+    color: var(--navy);
+    border: 1px solid rgba(3,2,80,0.18);
+  }
+
+  .card-icon {
+    font-size: 38px;
+    display: block;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+
+  .card-headline-ar {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .card-headline-en {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .card-body {
+    font-size: 13px;
+    color: rgba(3,2,80,0.65);
+    line-height: 1.85;
+    font-weight: 400;
+  }
+
+  /* the "solved" stamp on pain card */
+  .solved-stamp {
+    position: absolute;
+    top: 36px; left: 36px;
+    background: #c0392b;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    transform: rotate(-6deg);
+    opacity: 0.85;
+  }
+
+  .solved-stamp.fixed {
+    background: #1a8c4e;
+    transform: rotate(-4deg);
+  }
+
+  /* bullets stripped, replaced with elegant lines */
+  .clean-list {
+    list-style: none;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .clean-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12.5px;
+    color: rgba(3,2,80,0.7);
+    line-height: 1.6;
+  }
+
+  .clean-list li::before {
+    content: '';
+    display: block;
+    flex-shrink: 0;
+    width: 18px; height: 1.5px;
+    background: var(--gold);
+    margin-top: 9px;
+  }
+
+  /* divider between sections */
+  .section-divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 0 44px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    padding: 32px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: var(--offwhite);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cta-left {
+    direction: rtl;
+    text-align: right;
+  }
+
+  .cta-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .cta-headline {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  .cta-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    direction: ltr;
+    flex-shrink: 0;
+  }
+
+  .meeting-badge {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 10px 22px;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .meeting-badge small {
+    display: block;
+    font-size: 8px;
+    opacity: 0.55;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 18px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    direction: ltr;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-apps {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .app-chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--rule);
+    padding: 5px 11px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    background: transparent;
+  }
+
+  .app-chip:hover {
+    border-color: var(--navy);
+    background: rgba(3,2,80,0.04);
+  }
+
+  .app-chip svg { flex-shrink: 0; }
+
+  .app-chip-text { display: flex; flex-direction: column; line-height: 1.2; }
+  .act { font-size: 7px; color: var(--muted); font-family: 'Space Mono', monospace; letter-spacing: 0.5px; }
+  .acn { font-size: 10px; font-weight: 700; color: var(--navy); font-family: 'Space Mono', monospace; }
+
+  .web-chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--navy);
+    padding: 6px 14px;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    transition: background 0.2s;
+  }
+
+  .web-chip:hover { background: var(--navy-mid); }
+
+  .footer-brand {
+    text-align: right;
+    direction: rtl;
+  }
+
+  .footer-brandname {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--navy);
+  }
+
+  .footer-brandname span { color: var(--gold); }
+
+  .footer-brandsub {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+  }
+
+  /* bottom gold bar */
+  .bottom-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold2), var(--gold), var(--navy));
+  }
+
+  /* print btn */
+  .print-btn {
+    position: fixed;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    padding: 13px 38px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 30px rgba(3,2,80,0.3);
+    transition: all 0.2s;
+    z-index: 999;
+    letter-spacing: 0.5px;
+  }
+
+  .print-btn:hover {
+    background: var(--navy-mid);
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 8px 40px rgba(3,2,80,0.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="top-bar z1">
+    <div class="top-label">Partnership Offer · عرض شراكة</div>
+    <div class="brand-word">LENA<span>.</span>AI</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero z1">
+    <div class="hero-ghost">2</div>
+    <div class="hero-kicker">فرصتان لا تفوت · Two Things That Matter Now</div>
+    <div class="hero-h1">
+      حلّينا مشكلة<br>
+      وفتحنا <span class="accent">بابًا جديدًا</span>
+    </div>
+    <div class="hero-sub">We solved a real pain. Then we created a new opportunity.</div>
+  </div>
+
+  <!-- TWO COLUMNS -->
+  <div class="two-col z1">
+
+    <!-- LEFT: OPPORTUNITY -->
+    <div class="card" style="border-left: none;">
+      <div class="card-tag">
+        <div class="tag-pill opp">New Opportunity · فرصة جديدة</div>
+      </div>
+      <span class="card-icon">🚀</span>
+      <div class="card-headline-ar">الذكاء الاصطناعي يجلب لك عملاء جدد</div>
+      <span class="card-headline-en">AI That Generates Leads For You</span>
+      <div class="card-body">
+        فريقك يبيع أكثر — والذكاء الاصطناعي يفتحله أبواب جديدة.<br>
+        مش بديل، <strong style="color:var(--navy);">مضاعف لقدرته.</strong><br><br>
+        Your team sells more. AI opens doors they never could reach.
+        <em style="color:var(--muted); font-size:11px; display:block; margin-top:4px;">Not a replacement — a superpower.</em>
+      </div>
+      <ul class="clean-list">
+        <li>+1,000 بروكر يعرفون مشروعك</li>
+        <li>تحديثات فورية لكل السوق</li>
+        <li>فرص مبيعات لم تصلها قبل كده</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT: PAIN FIXED -->
+    <div class="card">
+      <div class="solved-stamp fixed">✓ Solved</div>
+      <div class="card-tag" style="margin-top: 8px;">
+        <div class="tag-pill pain">Pain Fixed · مشكلة اتحلّت</div>
+      </div>
+      <span class="card-icon">🛡️</span>
+      <div class="card-headline-ar">مشاكل نترا؟ خلصت.</div>
+      <span class="card-headline-en">No More NTRA Blocking</span>
+      <div class="card-body">
+        واتساب بيتحجب. التليفونات بتتحجب.<br>
+        <strong style="color:var(--navy);">عملاؤك بيضيعوا قبل ما تتكلم معاهم.</strong><br><br>
+        WhatsApp blocked. Calls blocked. Clients lost.
+        <em style="color:var(--muted); font-size:11px; display:block; margin-top:4px;">We fixed that — completely.</em>
+      </div>
+      <ul class="clean-list">
+        <li>لا حجب واتساب — أبداً</li>
+        <li>لا حجب تليفون — أبداً</li>
+        <li>تواصل مستمر مع كل عميل</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="section-divider z1"></div>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip z1">
+    <div class="cta-left">
+      <div class="cta-eyebrow">الخطوة التالية · Next Step</div>
+      <div class="cta-headline">عايز تعرف أكثر؟<br>
+        <span style="font-size:15px; font-weight:400; color:var(--muted);">Let's talk for 30 minutes.</span>
+      </div>
+      <div class="cta-sub">الصورة الكاملة بتتضح في الاجتماع.</div>
+    </div>
+    <div class="cta-right">
+      <div class="meeting-badge">
+        REQUEST A MEETING<br>اطلب اجتماع
+        <small>CEO · Commercial Director · Marketing Manager</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer z1">
+    <div class="footer-apps">
+      <a class="app-chip" href="https://apps.apple.com/eg/app/lena-ai/id6745050088" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#030250"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="app-chip-text">
+          <span class="act">iOS</span>
+          <span class="acn">App Store</span>
+        </div>
+      </a>
+      <a class="app-chip" href="https://play.google.com/store/apps/details?id=net.lenaai.LenaAIDashboardApp" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#030250"><path d="M3.18 23.76c.3.17.64.22.99.14l12.6-7.28-2.79-2.79-10.8 9.93zm-1.85-20.4C1.12 3.67 1 4.03 1 4.5v15c0 .47.12.83.33 1.14l.06.06 8.4-8.4v-.2L1.39 3.7l-.06.06zM20.49 10.7l-2.52-1.46-3.12 3.12 3.12 3.12 2.55-1.47c.73-.42.73-1.1 0-1.52l-.03.21zM4.17.24L16.77 7.5l-2.79 2.79L3.18.36C3.48.28 3.87.06 4.17.24z"/></svg>
+        <div class="app-chip-text">
+          <span class="act">Android</span>
+          <span class="acn">Google Play</span>
+        </div>
+      </a>
+      <a class="web-chip" href="https://lenaai.net/" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        lenaai.net
+      </a>
+    </div>
+    <div class="footer-brand">
+      <div class="footer-brandname">LENA<span>.</span>AI</div>
+      <div class="footer-brandsub">منصة الذكاء الاصطناعي العقاري</div>
+    </div>
+  </div>
+
+  <div class="bottom-bar"></div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ تصدير PDF · Export PDF</button>
+
+</body>
+</html>
